@@ -1,0 +1,50 @@
+import time
+
+def identificar_big_o(func):
+    n1 = 1000
+    n2 = 2000
+    
+    t0 = time.time()
+    func(n1)
+    t1 = time.time() - t0
+    
+    t0 = time.time()
+    func(n2)
+    t2 = time.time() - t0
+    
+    if t1 == 0: t1 = 1e-9
+    
+    ratio = t2 / t1
+    
+    print("--- Análisis ---")
+    print(f"Tiempo con n={n1}: {t1:.6f}s")
+    print(f"Tiempo con n={n2}: {t2:.6f}s")
+    print(f"Factor de crecimiento: {ratio:.2f}x")
+    
+    if ratio < 1.2:
+        return "Resultado probable: O(1) o O(log n)"
+    elif ratio < 2.5:
+        return "Resultado probable: O(n)"
+    elif ratio < 3.5:
+        return "Resultado probable: O(n log n)"
+    elif ratio < 5.0:
+        return "Resultado probable: O(n²)"
+    else:
+        return "Resultado probable: O(2ⁿ) o O(n!)"
+
+def mi_algoritmo_lineal(n):
+    lista = []
+    for i in range(n):
+        lista.append(i)
+
+def mi_algoritmo_cuadratico(n):
+    suma = 0
+    for i in range(n):
+        for j in range(n):
+            suma += 1
+
+print("Probando Lineal:")
+print(identificar_big_o(mi_algoritmo_lineal))
+
+print("\nProbando Cuadrático:")
+print(identificar_big_o(mi_algoritmo_cuadratico))

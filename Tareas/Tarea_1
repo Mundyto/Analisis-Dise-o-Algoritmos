@@ -1,0 +1,31 @@
+ALGORITMO JuegoDinosaurio
+1. INICIALIZACIÓN
+    dino_y = 0              // Altura del suelo
+    velocidad_y = 0         // Velocidad inicial del salto
+    gravedad = -1.5         // Fuerza que tira al dino hacia abajo
+    puntos = 0
+    en_el_suelo = verdadero
+    juego_activo = verdadero
+
+    obstaculo_x = 800       // El obstáculo aparece a la derecha de la pantalla
+    velocidad_juego = 10    // Velocidad a la que se mueven los obstáculos
+
+2. BUCLE PRINCIPAL DEL JUEGO
+    MIENTRAS juego_activo SEA VERDADERO HACER
+
+        A. ENTRADA DEL USUARIO (Controles)
+        SI tecla_espacio_presionada Y en_el_suelo ENTONCES
+            velocidad_y = 20       // Impulso inicial del salto
+            en_el_suelo = falso
+        FIN SI
+
+        B. LÓGICA DEL DINOSAURIO (Física del salto)
+        SI en_el_suelo SEA FALSO ENTONCES
+            dino_y = dino_y + velocidad_y   // Sube o baja el dino
+            velocidad_y = velocidad_y + gravedad // La gravedad reduce la velocidad del salto
+        FIN SI
+
+        Si el dino toca o cae por debajo del suelo, lo detenemos
+        SI dino_y <= 0 ENTONCES
+            dino_y = 0
+            en_el_suelo = verdadero
